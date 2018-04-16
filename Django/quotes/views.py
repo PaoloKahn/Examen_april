@@ -23,7 +23,7 @@ def examen(request):
 	values = url[38:]
 	wordList = re.sub("/", " ",  values).split()
 	print wordList
-	return render(request, 'quotes/search_form.html', {})
+	return render(request, 'quotes/list.html', {'valuez' : wordList})
 
 def search_form(request):
     return render(request, 'quotes/search_form.html', {})
