@@ -15,15 +15,19 @@ def detail(request, author_name):
 
     return render(request, 'quotes/detail.html', {'quote_list': quote_list})
 
-	
-
+test = []
 def examen(request):
 	url = request.build_absolute_uri()
 	print request.build_absolute_uri()
-	values = url[38:]
+	values = url[30:]
+	if "//" in values:
+		return render(request, 'quotes/list.html', {'valuez' : test})
 	wordList = re.sub("/", " ",  values).split()
+	check = "//"
 	print wordList
-	return render(request, 'quotes/list.html', {'valuez' : wordList})
+	if wordList:
+	   test.append(wordList)
+	return render(request, 'quotes/list.html', {'valuez' : test})
 
 def search_form(request):
     return render(request, 'quotes/search_form.html', {})
