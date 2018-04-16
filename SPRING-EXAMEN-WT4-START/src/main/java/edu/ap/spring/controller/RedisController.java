@@ -104,7 +104,7 @@ public class RedisController {
 	   for(InhaalExamen e : this.examenRedisTemplate.getAll()) {
 		   html +="<h3>"+e.getStudent()+"</h3>";
 		   html+="<li> Course: "+e.getExam()+"</li>";
-		   html+="<li> Date: "+e.getReason()+"</li>";
+		   html+="<li> Reason: "+e.getReason()+"</li>";
 		   html+="<li> Date: "+e.getDate()+"</li>";
 	   }
 	   html += "</BODY></HTML>";
@@ -124,7 +124,7 @@ public class RedisController {
 		   if(student.equalsIgnoreCase(e.getStudent())) {
 			   html +="<h3>"+e.getStudent()+"</h3>";
 			   html+="<li> Course: "+e.getExam()+"</li>";
-			   html+="<li> Date: "+e.getReason()+"</li>";
+			   html+="<li> Reason: "+e.getReason()+"</li>";
 			   html+="<li> Date: "+e.getDate()+"</li>";
 		   }
 	   }
