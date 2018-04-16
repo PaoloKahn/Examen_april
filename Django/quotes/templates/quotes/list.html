@@ -1,6 +1,9 @@
 
  <ul>
     {% for a in valuez %}
-       {{ a }} <br>
+    	{% for x in a %}
+    		{{x}} --
+    		{% endfor %}
+      <br>
     {% endfor %}
 </ul>

@@ -51,13 +51,13 @@ public class RedisController {
 	   		"		<div class='form-group row'>\r\n" + 
 	   		"		 	<div class='col-xs-4'>\r\n" + 
 	   		"				<label for='firstName'>Your name : </label>\r\n" + 
-	   		"		    		<input type='text' class='form-control' name='name' id='name'>\r\n" + 
+	   		"		    		<input type='text' class='form-control' name='student' id='student'>\r\n" + 
 	   		"	    		</div>\r\n" + 
 	   		"	    	</div>\r\n" + 
 	   		"		<div class='form-group row'>\r\n" + 
 	   		"			<div class='col-xs-4'>\r\n" + 
 	   		"				<label for='lastName'>Course: </label>\r\n" + 
-	   		"		    		<input type='text' class='form-control' name='course' id='course'>\r\n" + 
+	   		"		    		<input type='text' class='form-control' name='exam' id='exam'>\r\n" + 
 	   		"		    	</div>\r\n" + 
 	   		"	    	</div>\r\n" + 
 	   		"<div class='form-group row'>\r\n" + 
@@ -80,9 +80,9 @@ public class RedisController {
    }
    
    
-   @PostMapping("/new")
+   @PostMapping(value = "/new")
    @ResponseBody
-   public String addExam(@RequestParam("name") String name, @RequestParam("course") String course,@RequestParam("reason") String reason,Model model) {
+   public String addExam(@RequestParam(value = "student") String name, @RequestParam("exam") String course,@RequestParam("reason") String reason) {
 	   InhaalExamen e = new InhaalExamen(name,course,reason,Calendar.getInstance().getTime().toString());
 	   /* check of het bestaat */
 	   for(InhaalExamen in : this.examenRedisTemplate.getAll()) {
@@ -111,17 +111,15 @@ public class RedisController {
 	   
 	   return html;
    }
-   //list?student
    
    @RequestMapping("/list")
    @ResponseBody
    public String listOnePerson(  @RequestParam("student") String student) {
 	   
-	  // System.out.println(id);
 	   String html = "<HTML>";
 	   html += "<BODY><h1> Aantal aanvragen :" +this.examenRedisTemplate.getAll().size()+" Inhaal examens</h1><br/><br/><ul>";
 	   List<InhaalExamen> list = this.examenRedisTemplate.getAll();
-	   list.sort(Comparator.comparing(InhaalExamen::getExam));
+	   list.sort(Comparator.comparing(InhaalExamen::getReason));
 	   for(InhaalExamen e : list) {
 		   if(student.equalsIgnoreCase(e.getStudent())) {
 			   html +="<h3>"+e.getStudent()+"</h3>";

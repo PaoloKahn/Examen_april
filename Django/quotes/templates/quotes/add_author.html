@@ -1,9 +1,0 @@
-<h1>Add an author</h1>
-<form action='{% url 'quotes:add_author' %}' method='POST'>
-{% csrf_token %}
-<label for = 'search_term'>Your Search : </label>
-<input id='name' type='text' name='name''>
-<input id='bio' type='text' name='bio''>
-<input id='quote' type='text' name='quote''>
-<input type='submit' value='Search' />
-</form>
